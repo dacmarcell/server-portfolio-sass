@@ -1,73 +1,66 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# SASS - Portfolio
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+[FIGMA](https://www.figma.com/design/IsOR19hpYOPF9KJrg4idXL/SASS?node-id=0-1&t=XYKZlDwwfrjKCJFX-0)
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Dependências
 
-## Description
+- [PostgreSQL Db](https://www.postgresql.org/docs/)
+- [Node](https://nodejs.org/docs/latest/api/)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Entidades
 
-## Installation
+- Usuário (users)
 
-```bash
-$ npm install
-```
+user_id         (definir tipo de ID)
+name            TEXT            NOT NULL
+last_name       TEXT            NOT NULL
+about           VARCHAR(100)    NOT NULL
 
-## Running the app
+- Links Sociais (social_links)
 
-```bash
-# development
-$ npm run start
+social_link_id (definir tipo de ID)
+name            TEXT            NOT NULL
+url             TEXT            NOT NULL
+user_id         FK(users)
 
-# watch mode
-$ npm run start:dev
+- Linguagens de Programação (programming_languages)
 
-# production mode
-$ npm run start:prod
-```
+programming_language_id (definir tipo de ID)
+name            TEXT    NOT NULL
+level           TEXT    NOT NULL        DEFAULT(0)
 
-## Test
+- Projetos (projects)
 
-```bash
-# unit tests
-$ npm run test
+project_id (definir tipo de ID)
+name            TEXT    NOT NULL
+repository      TEXT    NOT NULL
+url             TEXT    NULL
+user_id         FK(users)
 
-# e2e tests
-$ npm run test:e2e
+- Áreas de atuação (fields_of_expertise)
 
-# test coverage
-$ npm run test:cov
-```
+field_code (definir tipo de ID)
+area                    ENUM(expertise_fields)
 
-## Support
+## Entidades de relacionamento
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- UsuárioÁreaDeAtuação (user_fields_of_expertise) [n-n]
 
-## Stay in touch
+field_code              FK(fields_of_expertise)
+user_id                 FK(users)
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- UsuárioLinguagensDeProgramacao (user_programming_languages) [n-n]
 
-## License
+programming_language_id FK(programming_languages)
+user_id                 FK(user)
 
-Nest is [MIT licensed](LICENSE).
+## Enums
+
+- Campos de atuação (expertise_fields): [Back-end, Front-end, Full-Stack, Devops]
+
+## Relações
+
+- Usuário <n-n> Áreas de atuação - (usuário tem várias áreas de atuação, área de atuação tem vários usuários) [UsuárioÁreaDeAtuação]
+- Usuário <n-n> Linguagens de Programação - (usuário tem várias linguagens de programação, linguagem de programação tem vários usuários) [UsuárioLinguagensDeProgramacao]
+- Usuário <1-n> Projeto - (usuário tem vários projetos, projeto só tem um usuário)
+- Usuário <1-n> Links sociais - (usuário tem vários links sociais, link social tem um usuário)
