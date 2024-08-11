@@ -21,8 +21,9 @@ about           VARCHAR(600)    NOT NULL
 - Links Sociais (social_links)
 
 social_link_id  NUMBER          PRIMARY KEY    AUTO INCREMENT
-name            TEXT            NOT NULL
+name            ENUM([Linkedin, Github, Twitter, Facebook, Instagram])            NOT NULL
 url             TEXT            NOT NULL
+
 user_id         FK(users)
 
 - Linguagens de Programação (programming_languages)
@@ -37,28 +38,13 @@ project_id (definir tipo de ID)
 name            TEXT    NOT NULL
 repository      TEXT    NOT NULL
 url             TEXT    NULL
+
 user_id         FK(users)
 
 - Áreas de atuação (fields_of_expertise)
 
 field_code (definir tipo de ID)
-area                    ENUM(expertise_fields)
-
-## Entidades de relacionamento
-
-- UsuárioÁreaDeAtuação (user_fields_of_expertise) [n-n]
-
-field_code              FK(fields_of_expertise)
-user_id                 FK(users)
-
-- UsuárioLinguagensDeProgramacao (user_programming_languages) [n-n]
-
-programming_language_id FK(programming_languages)
-user_id                 FK(user)
-
-## Enums
-
-- Campos de atuação (expertise_fields): [Back-end, Front-end, Full-Stack, Devops]
+area                    ENUM([Back-end, Front-end, Full-Stack, Devops])
 
 ## Relações
 
