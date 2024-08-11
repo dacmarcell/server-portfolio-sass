@@ -11,7 +11,7 @@
 
 - Usuário (users)
 
-user_id         (definir tipo de ID)
+user_id         TEXT            PRIMARY KEY     DEFAULT UUID
 first_name      TEXT            NOT NULL
 last_name       TEXT            NOT NULL
 email           TEXT            NOT NULL
