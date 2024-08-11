@@ -14,7 +14,9 @@
 user_id         (definir tipo de ID)
 name            TEXT            NOT NULL
 last_name       TEXT            NOT NULL
-about           VARCHAR(100)    NOT NULL
+email           TEXT            NOT NULL
+password        TEXT            NOT NULL
+about           VARCHAR(600)    NOT NULL
 
 - Links Sociais (social_links)
 
