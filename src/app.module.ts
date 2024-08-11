@@ -5,6 +5,7 @@ import { UsersModule } from './users/users.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { PostgresConfigService } from './config/postgres.config.service';
+import { SocialLinksModule } from './social_links/social_links.module';
 
 @Module({
   imports: [
@@ -16,7 +17,8 @@ import { PostgresConfigService } from './config/postgres.config.service';
     TypeOrmModule.forRootAsync({
       useClass: PostgresConfigService,
       inject: [PostgresConfigService]
-    })
+    }),
+    SocialLinksModule
   ],
   controllers: [AppController],
   providers: [AppService],
