@@ -10,6 +10,7 @@ import { SocialLinksModule } from './social_links/social_links.module';
 @Module({
   imports: [
     UsersModule,
+    SocialLinksModule,
     ConfigModule.forRoot({
       isGlobal: true,
       cache: true
@@ -18,7 +19,6 @@ import { SocialLinksModule } from './social_links/social_links.module';
       useClass: PostgresConfigService,
       inject: [PostgresConfigService]
     }),
-    SocialLinksModule
   ],
   controllers: [AppController],
   providers: [AppService],
