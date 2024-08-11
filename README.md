@@ -20,7 +20,7 @@ about           VARCHAR(600)    NOT NULL
 
 - Links Sociais (social_links)
 
-social_link_id (definir tipo de ID)
+social_link_id  NUMBER          PRIMARY KEY    AUTO INCREMENT
 name            TEXT            NOT NULL
 url             TEXT            NOT NULL
 user_id         FK(users)
