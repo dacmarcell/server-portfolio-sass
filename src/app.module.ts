@@ -6,11 +6,13 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { PostgresConfigService } from './config/postgres.config.service';
 import { SocialLinksModule } from './social_links/social_links.module';
+import { ProgrammingLanguagesModule } from './programming_languages/programming_languages.module';
 
 @Module({
   imports: [
     UsersModule,
     SocialLinksModule,
+    ProgrammingLanguagesModule,
     ConfigModule.forRoot({
       isGlobal: true,
       cache: true
