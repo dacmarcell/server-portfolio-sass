@@ -36,8 +36,8 @@ level           TEXT    NOT NULL        DEFAULT(0)
 
 project_id (definir tipo de ID)
 name            TEXT    NOT NULL
-repository      TEXT    NOT NULL
-url             TEXT    NULL
+repo_url        TEXT    NOT NULL
+deploy_url      TEXT    NULL
 
 user_id         FK(users)
 
