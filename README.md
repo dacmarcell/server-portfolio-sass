@@ -44,7 +44,7 @@ user_id         FK(users)
 - Áreas de atuação (fields_of_expertise)
 
 field_code (definir tipo de ID)
-area                    ENUM([Back-end, Front-end, Full-Stack, Devops])
+area                    ENUM(['Back-end', 'Front-end', 'Full-stack', 'Mobile', 'DevOps', 'Data Science', 'UI/UX', 'Cybersecurity', 'AI/ML', 'Blockchain', 'IoT', 'Cloud Computing', 'AR/VR', 'Game Development', 'Quantum Computing', 'Big Data'])
 
 ## Relações
 
