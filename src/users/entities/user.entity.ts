@@ -23,4 +23,8 @@ export class User {
 
     @Column()
     about: string
+
+    @ManyToMany(() => FieldsOfExpertise)
+    @JoinTable()
+    fields_of_expertise: FieldsOfExpertise[]
 }

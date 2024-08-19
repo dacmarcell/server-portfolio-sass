@@ -30,4 +30,7 @@ export class FieldsOfExpertise {
         enum: FieldsOfExpertiseEnum,
     })
     name: FieldsOfExpertiseEnum
+
+    @ManyToMany(() => User)
+    users: User[]
 }
