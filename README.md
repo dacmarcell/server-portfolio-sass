@@ -48,7 +48,7 @@ area                    ENUM(['Back-end', 'Front-end', 'Full-stack', 'Mobile', '
 
 ## Relações
 
-- Usuário <n-n> Áreas de atuação - (usuário tem várias áreas de atuação, área de atuação tem vários usuários) [UsuárioÁreaDeAtuação]
-- Usuário <n-n> Linguagens de Programação - (usuário tem várias linguagens de programação, linguagem de programação tem vários usuários) [UsuárioLinguagensDeProgramacao]
-- Usuário <1-n> Projeto - (usuário tem vários projetos, projeto só tem um usuário)
-- Usuário <1-n> Links sociais - (usuário tem vários links sociais, link social tem um usuário)
+- [x] Usuário <n-n> Áreas de atuação - (usuário tem várias áreas de atuação, área de atuação tem vários usuários) [UsuárioÁreaDeAtuação]
+- [x] Usuário <n-n> Linguagens de Programação - (usuário tem várias linguagens de programação, linguagem de programação tem vários usuários) [UsuárioLinguagensDeProgramacao]
+- [x] Usuário <1-n> Projeto - (usuário tem vários projetos, projeto só tem um usuário)
+- [x] Usuário <1-n> Links sociais - (usuário tem vários links sociais, link social tem um usuário)
