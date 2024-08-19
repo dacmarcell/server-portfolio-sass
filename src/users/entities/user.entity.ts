@@ -27,4 +27,9 @@ export class User {
     @ManyToMany(() => FieldsOfExpertise)
     @JoinTable()
     fields_of_expertise: FieldsOfExpertise[]
+
+    @ManyToMany(() => ProgrammingLanguage)
+    @JoinTable()
+    programming_languages: ProgrammingLanguage[]
+
 }

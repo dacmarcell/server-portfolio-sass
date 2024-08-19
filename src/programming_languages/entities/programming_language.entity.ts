@@ -11,4 +11,7 @@ export class ProgrammingLanguage {
 
     @Column({ default: 0 })
     level: number
+
+    @ManyToMany(() => User)
+    users: User[]
 }
