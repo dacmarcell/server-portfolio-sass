@@ -35,4 +35,7 @@ export class User {
     @OneToMany(() => Project, project => project.user)
     projects: Project[]
 
+    @OneToMany(() => SocialLink, social_link => social_link.user)
+    social_links: SocialLink[]
+
 }

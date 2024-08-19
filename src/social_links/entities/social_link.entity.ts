@@ -8,7 +8,10 @@ export class SocialLink {
 
     @Column()
     name: string
-    
+
     @Column()
     url: string
+
+    @ManyToOne(() => User, user => user.social_links)
+    user: User
 }
