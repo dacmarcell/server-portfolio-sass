@@ -1,7 +1,8 @@
-import { BeforeInsert, Column, Entity, PrimaryColumn } from "typeorm";
+import { User } from "src/users/entities/user.entity";
+import { BeforeInsert, Column, Entity, ManyToOne, PrimaryColumn } from "typeorm";
 import { ulid } from "ulid";
 
-@Entity({name: 'projects' })
+@Entity({ name: 'projects' })
 export class Project {
     @PrimaryColumn()
     project_id: string;
@@ -9,7 +10,7 @@ export class Project {
     @Column()
     repo_url: string;
 
-    @Column({ nullable: true})
+    @Column({ nullable: true })
     deploy_url: string
 
     @BeforeInsert()

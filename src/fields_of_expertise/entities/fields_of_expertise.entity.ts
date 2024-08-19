@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { User } from "src/users/entities/user.entity";
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 
 export enum FieldsOfExpertiseEnum {
     BackEnd = 'Back-end',
@@ -19,7 +20,7 @@ export enum FieldsOfExpertiseEnum {
     BigData = 'Big Data'
 }
 
-@Entity({name: 'fields_of_expertise' })
+@Entity({ name: 'fields_of_expertise' })
 export class FieldsOfExpertise {
     @PrimaryGeneratedColumn('increment')
     field_code: string
