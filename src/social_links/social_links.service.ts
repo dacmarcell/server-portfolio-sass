@@ -1,26 +1,42 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateSocialLinkDto } from './dto/create-social_link.dto';
 import { UpdateSocialLinkDto } from './dto/update-social_link.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { SocialLink } from './entities/social_link.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class SocialLinksService {
+  constructor(
+    @InjectRepository(SocialLink)
+    private readonly socialLinksRepository: Repository<SocialLink>
+  ) { }
+
   create(createSocialLinkDto: CreateSocialLinkDto) {
-    return 'This action adds a new socialLink';
+    const socialLink = this.socialLinksRepository.create(createSocialLinkDto)
+    return this.socialLinksRepository.save(socialLink)
   }
 
-  findAll() {
-    return `This action returns all socialLinks`;
+  async findAll() {
+    return await this.socialLinksRepository.find()
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} socialLink`;
+  async findOne(id: number) {
+    return await this.socialLinksRepository.findOneBy({ social_link_id: id })
   }
 
-  update(id: number, updateSocialLinkDto: UpdateSocialLinkDto) {
-    return `This action updates a #${id} socialLink`;
+  async update(id: number, updateSocialLinkDto: UpdateSocialLinkDto) {
+    const socialLink = await this.findOne(id)
+    if (!socialLink) {
+      throw new NotFoundException(`Social Link with id ${id} not found`)
+    }
+
+    Object.assign(socialLink, <SocialLink>updateSocialLinkDto)
+
+    await this.socialLinksRepository.save(socialLink)
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} socialLink`;
+  async remove(id: number) {
+    return await this.socialLinksRepository.delete({ social_link_id: id });
   }
 }

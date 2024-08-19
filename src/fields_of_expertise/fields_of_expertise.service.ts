@@ -1,26 +1,42 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateFieldsOfExpertiseDto } from './dto/create-fields_of_expertise.dto';
 import { UpdateFieldsOfExpertiseDto } from './dto/update-fields_of_expertise.dto';
+import { FieldsOfExpertise } from './entities/fields_of_expertise.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class FieldsOfExpertiseService {
+  constructor(
+    @InjectRepository(FieldsOfExpertise)
+    private readonly fieldsOfExpertiseRepository: Repository<FieldsOfExpertise>
+  ) { }
+
   create(createFieldsOfExpertiseDto: CreateFieldsOfExpertiseDto) {
-    return 'This action adds a new fieldsOfExpertise';
+    const fieldOfExpertise = this.fieldsOfExpertiseRepository.create(createFieldsOfExpertiseDto)
+    return this.fieldsOfExpertiseRepository.save(fieldOfExpertise)
   }
 
-  findAll() {
-    return `This action returns all fieldsOfExpertise`;
+  async findAll() {
+    return await this.fieldsOfExpertiseRepository.find()
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} fieldsOfExpertise`;
+  async findOne(id: string) {
+    return await this.fieldsOfExpertiseRepository.findOneBy({ field_code: id })
   }
 
-  update(id: number, updateFieldsOfExpertiseDto: UpdateFieldsOfExpertiseDto) {
-    return `This action updates a #${id} fieldsOfExpertise`;
+  async update(id: string, updateFieldsOfExpertiseDto: UpdateFieldsOfExpertiseDto) {
+    const fieldOfExpertise = await this.findOne(id)
+    if (!fieldOfExpertise) {
+      throw new NotFoundException(`Social Link with id ${id} not found`)
+    }
+
+    Object.assign(fieldOfExpertise, <FieldsOfExpertise>updateFieldsOfExpertiseDto)
+
+    await this.fieldsOfExpertiseRepository.save(fieldOfExpertise)
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} fieldsOfExpertise`;
+  async remove(id: string) {
+    return await this.fieldsOfExpertiseRepository.delete({ field_code: id });
   }
 }
