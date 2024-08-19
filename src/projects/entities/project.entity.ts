@@ -13,6 +13,9 @@ export class Project {
     @Column({ nullable: true })
     deploy_url: string
 
+    @ManyToOne(() => User, user => user.projects)
+    user: User
+
     @BeforeInsert()
     generateId() {
         this.project_id = ulid()

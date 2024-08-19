@@ -32,4 +32,7 @@ export class User {
     @JoinTable()
     programming_languages: ProgrammingLanguage[]
 
+    @OneToMany(() => Project, project => project.user)
+    projects: Project[]
+
 }
