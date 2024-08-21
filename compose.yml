@@ -3,7 +3,7 @@ services:
     image: postgres:latest
     restart: unless-stopped
     ports:
-      - ${DB_PORT:-5432}:5432
+      - 5431:5432
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASS}

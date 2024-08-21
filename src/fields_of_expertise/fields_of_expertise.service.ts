@@ -27,12 +27,8 @@ export class FieldsOfExpertiseService {
 
   async update(id: string, updateFieldsOfExpertiseDto: UpdateFieldsOfExpertiseDto) {
     const fieldOfExpertise = await this.findOne(id)
-    if (!fieldOfExpertise) {
-      throw new NotFoundException(`Social Link with id ${id} not found`)
-    }
-
+    if (!fieldOfExpertise) throw new NotFoundException(`Social Link not found`)
     Object.assign(fieldOfExpertise, <FieldsOfExpertise>updateFieldsOfExpertiseDto)
-
     await this.fieldsOfExpertiseRepository.save(fieldOfExpertise)
   }
 

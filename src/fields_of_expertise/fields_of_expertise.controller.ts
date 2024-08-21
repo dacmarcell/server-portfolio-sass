@@ -5,7 +5,7 @@ import { UpdateFieldsOfExpertiseDto } from './dto/update-fields_of_expertise.dto
 
 @Controller('fields-of-expertise')
 export class FieldsOfExpertiseController {
-  constructor(private readonly fieldsOfExpertiseService: FieldsOfExpertiseService) {}
+  constructor(private readonly fieldsOfExpertiseService: FieldsOfExpertiseService) { }
 
   @Post()
   create(@Body() createFieldsOfExpertiseDto: CreateFieldsOfExpertiseDto) {
@@ -19,16 +19,16 @@ export class FieldsOfExpertiseController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.fieldsOfExpertiseService.findOne(+id);
+    return this.fieldsOfExpertiseService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateFieldsOfExpertiseDto: UpdateFieldsOfExpertiseDto) {
-    return this.fieldsOfExpertiseService.update(+id, updateFieldsOfExpertiseDto);
+    return this.fieldsOfExpertiseService.update(id, updateFieldsOfExpertiseDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.fieldsOfExpertiseService.remove(+id);
+    return this.fieldsOfExpertiseService.remove(id);
   }
 }
