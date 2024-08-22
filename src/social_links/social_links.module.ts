@@ -8,5 +8,6 @@ import { SocialLink } from './entities/social_link.entity';
   imports: [TypeOrmModule.forFeature([SocialLink])],
   controllers: [SocialLinksController],
   providers: [SocialLinksService],
+  exports: [SocialLinksService]
 })
 export class SocialLinksModule { }
