@@ -23,6 +23,12 @@ export class UsersController {
     return this.usersService.removeFieldOfExpertise(id, fieldCode);
   }
 
+  @Post(':id/add-programming-language')
+  addProgrammingLanguage(@Param('id') id: string, @Query('languageCode') languageCode: number) {
+    return this.usersService.addProgrammingLanguage(id, +languageCode);
+  }
+
+
   @Get()
   findAll() {
     return this.usersService.findAll();
