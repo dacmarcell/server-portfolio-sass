@@ -28,6 +28,30 @@ export class UsersController {
     return this.usersService.addProgrammingLanguage(id, +languageCode);
   }
 
+  @Post(':id/remove-programming-language')
+  removeProgrammingLanguage(@Param('id') id: string, @Query('languageCode') languageCode: number) {
+    return this.usersService.removeProgrammingLanguage(id, +languageCode);
+  }
+
+  @Post(':id/add-project')
+  addProject(@Param('id') id: string, @Query('projectID') projectID: string) {
+    return this.usersService.addProject(id, projectID);
+  }
+
+  @Post(':id/remove-project')
+  removeProject(@Param('id') id: string, @Query('projectID') projectID: string) {
+    return this.usersService.removeProject(id, projectID);
+  }
+
+  @Post(':id/add-social-link')
+  addSocialLink(@Param('id') id: string, @Query('linkID') linkID: number) {
+    return this.usersService.addSocialLink(id, +linkID);
+  }
+
+  @Post(':id/remove-social-link')
+  removeSocialLink(@Param('id') id: string, @Query('linkID') linkID: number) {
+    return this.usersService.removeSocialLink(id, +linkID);
+  }
 
   @Get()
   findAll() {
