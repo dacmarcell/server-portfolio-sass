@@ -29,4 +29,4 @@ import { FieldsOfExpertiseModule } from './fields_of_expertise/fields_of_experti
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
