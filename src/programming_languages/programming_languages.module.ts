@@ -8,5 +8,6 @@ import { ProgrammingLanguage } from './entities/programming_language.entity';
   imports: [TypeOrmModule.forFeature([ProgrammingLanguage])],
   controllers: [ProgrammingLanguagesController],
   providers: [ProgrammingLanguagesService],
+  exports: [ProgrammingLanguagesService]
 })
 export class ProgrammingLanguagesModule { }
