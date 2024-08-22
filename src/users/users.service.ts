@@ -51,16 +51,14 @@ export class UsersService {
     return await this.usersRepository.delete({ user_id: id });
   }
 
-  public async addFieldOfExpertise(id: string, fieldOfExpertiseID: string, fieldOfExpertise: CreateFieldsOfExpertiseDto) {
+  public async addFieldOfExpertise(id: string, fieldOfExpertiseID: string) {
     const user = await this.findOne(id);
-    if (!user) throw new NotFoundException('User not found');
+    if (!user) throw new NotFoundException('User was not found');
 
     const foundFieldOfExpertise = await this.fieldsOfExpertiseService.findOne(fieldOfExpertiseID);
 
     if (!foundFieldOfExpertise) {
-      const newFieldOfExpertise = await this.fieldsOfExpertiseService.create(fieldOfExpertise);
-      user.fields_of_expertise.push(newFieldOfExpertise);
-      return await this.usersRepository.save(user);
+      throw new NotFoundException('Field of expertise was not found');
     }
 
     user.fields_of_expertise.push(foundFieldOfExpertise);
