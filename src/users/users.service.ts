@@ -6,6 +6,8 @@ import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { FieldsOfExpertiseService } from 'src/fields_of_expertise/fields_of_expertise.service';
 import { ProgrammingLanguagesService } from 'src/programming_languages/programming_languages.service';
+import { ProjectsService } from 'src/projects/projects.service';
+import { SocialLinksService } from 'src/social_links/social_links.service';
 
 @Injectable()
 export class UsersService {
@@ -14,6 +16,8 @@ export class UsersService {
     private readonly usersRepository: Repository<User>,
     private readonly fieldsOfExpertiseService: FieldsOfExpertiseService,
     private readonly programmingLanguageService: ProgrammingLanguagesService,
+    private readonly projectsService: ProjectsService,
+    private readonly socialLinksService: SocialLinksService
   ) { }
 
   public async create(createUserDto: CreateUserDto) {
@@ -56,7 +60,6 @@ export class UsersService {
     if (!user) throw new NotFoundException('User was not found');
 
     const foundFieldOfExpertise = await this.fieldsOfExpertiseService.findOne(fieldOfExpertiseID);
-
     if (!foundFieldOfExpertise) {
       throw new NotFoundException('Field of expertise was not found');
     }
@@ -70,7 +73,6 @@ export class UsersService {
     if (!user) throw new NotFoundException('User was not found');
 
     const foundFieldOfExpertise = await this.fieldsOfExpertiseService.findOne(fieldCode);
-
     if (!foundFieldOfExpertise) {
       throw new NotFoundException('Field of expertise was not found');
     }
@@ -85,7 +87,6 @@ export class UsersService {
     if (!user) throw new NotFoundException('User was not found');
 
     const foundProgrammingLanguage = await this.programmingLanguageService.findOne(programmingLanguageID);
-
     if (!foundProgrammingLanguage) {
       throw new NotFoundException('Programming language was not found');
     }
@@ -98,10 +99,67 @@ export class UsersService {
     const user = await this.findOne(id);
     if (!user) throw new NotFoundException('User was not found');
 
+    const foundProgrammingLanguage = await this.programmingLanguageService.findOne(programmingLanguageID);
+    if (!foundProgrammingLanguage) {
+      throw new NotFoundException('Programming language was not found');
+    }
+
     user.programming_languages = user.programming_languages.filter(language => language.programming_language_id !== programmingLanguageID);
 
     return await this.usersRepository.save(user);
   }
 
+  public async addProject(id: string, projectID: string) {
+    const user = await this.findOne(id);
+    if (!user) throw new NotFoundException('User was not found');
 
+    const project = await this.projectsService.findOne(projectID);
+    if (!project) {
+      throw new NotFoundException('Project was not found');
+    }
+
+    user.projects.push(project);
+    return await this.usersRepository.save(user);
+  }
+
+  public async removeProject(id: string, projectID: string) {
+    const user = await this.findOne(id);
+    if (!user) throw new NotFoundException('User was not found');
+
+    const project = await this.projectsService.findOne(projectID);
+    if (!project) {
+      throw new NotFoundException('Project was not found');
+    }
+
+    user.projects = user.projects.filter(project => project.project_id !== projectID);
+
+    return await this.usersRepository.save(user);
+  }
+
+  public async addSocialLink(id: string, socialLinkID: number) {
+    const user = await this.findOne(id);
+    if (!user) throw new NotFoundException('User was not found');
+
+    const socialLink = await this.socialLinksService.findOne(socialLinkID);
+    if (!socialLink) {
+      throw new NotFoundException('Social link was not found');
+    }
+
+    user.social_links.push(socialLink);
+    return await this.usersRepository.save(user);
+  }
+
+  public async removeSocialLink(id: string, socialLinkID: number) {
+    const user = await this.findOne(id);
+    if (!user) throw new NotFoundException('User was not found');
+
+    const socialLink = await this.socialLinksService.findOne(socialLinkID);
+    if (!socialLink) {
+      throw new NotFoundException('Social link was not found');
+    }
+
+    user.social_links = user.social_links.filter(link => link.social_link_id !== socialLinkID);
+
+    return await this.usersRepository.save(user);
+  }
 }
