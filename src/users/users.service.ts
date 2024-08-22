@@ -79,4 +79,17 @@ export class UsersService {
 
     return await this.usersRepository.save(user);
   }
+  public async addProgrammingLanguage(id: string, programmingLanguageID: number) {
+    const user = await this.findOne(id);
+    if (!user) throw new NotFoundException('User was not found');
+
+    const foundProgrammingLanguage = await this.programmingLanguageService.findOne(programmingLanguageID);
+
+    if (!foundProgrammingLanguage) {
+      throw new NotFoundException('Programming language was not found');
+    }
+
+    user.programming_languages.push(foundProgrammingLanguage);
+    return await this.usersRepository.save(user);
+  }
 }
