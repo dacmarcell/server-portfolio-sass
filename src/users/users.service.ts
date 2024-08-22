@@ -64,4 +64,19 @@ export class UsersService {
     user.fields_of_expertise.push(foundFieldOfExpertise);
     return await this.usersRepository.save(user);
   }
+
+  public async removeFieldOfExpertise(id: string, fieldCode: string) {
+    const user = await this.findOne(id);
+    if (!user) throw new NotFoundException('User was not found');
+
+    const foundFieldOfExpertise = await this.fieldsOfExpertiseService.findOne(fieldCode);
+
+    if (!foundFieldOfExpertise) {
+      throw new NotFoundException('Field of expertise was not found');
+    }
+
+    user.fields_of_expertise = user.fields_of_expertise.filter(field => field.field_code !== fieldCode);
+
+    return await this.usersRepository.save(user);
+  }
 }
