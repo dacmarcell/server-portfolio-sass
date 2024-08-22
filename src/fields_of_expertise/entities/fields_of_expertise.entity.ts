@@ -22,7 +22,7 @@ export enum FieldsOfExpertiseEnum {
 
 @Entity({ name: 'fields_of_expertise' })
 export class FieldsOfExpertise {
-    @PrimaryGeneratedColumn('increment')
+    @PrimaryGeneratedColumn('uuid')
     field_code: string
 
     @Column({
