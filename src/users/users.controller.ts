@@ -18,6 +18,11 @@ export class UsersController {
     return this.usersService.addFieldOfExpertise(id, fieldCode);
   }
 
+  @Post(':id/remove-field-of-expertise')
+  removeFieldOfExpertise(@Param('id') id: string, @Query('fieldCode') fieldCode: string) {
+    return this.usersService.removeFieldOfExpertise(id, fieldCode);
+  }
+
   @Get()
   findAll() {
     return this.usersService.findAll();
