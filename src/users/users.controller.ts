@@ -14,7 +14,7 @@ export class UsersController {
   }
 
   @Post(':id/add-field-of-expertise')
-  addFieldOfExpertise(@Param('id') id: string, @Query('fieldCode') fieldCode: string = "0", @Body() fieldOfExpertise: CreateFieldsOfExpertiseDto) {
+  addFieldOfExpertise(@Param('id') id: string, @Query('fieldCode') fieldCode: string) {
     return this.usersService.addFieldOfExpertise(id, fieldCode);
   }
 
