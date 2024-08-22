@@ -4,9 +4,8 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
-import { FieldsOfExpertise, FieldsOfExpertiseEnum } from 'src/fields_of_expertise/entities/fields_of_expertise.entity';
 import { FieldsOfExpertiseService } from 'src/fields_of_expertise/fields_of_expertise.service';
-import { CreateFieldsOfExpertiseDto } from 'src/fields_of_expertise/dto/create-fields_of_expertise.dto';
+import { ProgrammingLanguagesService } from 'src/programming_languages/programming_languages.service';
 
 @Injectable()
 export class UsersService {
@@ -14,6 +13,7 @@ export class UsersService {
     @InjectRepository(User)
     private readonly usersRepository: Repository<User>,
     private readonly fieldsOfExpertiseService: FieldsOfExpertiseService,
+    private readonly programmingLanguageService: ProgrammingLanguagesService,
   ) { }
 
   public async create(createUserDto: CreateUserDto) {
@@ -79,6 +79,7 @@ export class UsersService {
 
     return await this.usersRepository.save(user);
   }
+
   public async addProgrammingLanguage(id: string, programmingLanguageID: number) {
     const user = await this.findOne(id);
     if (!user) throw new NotFoundException('User was not found');
@@ -92,4 +93,15 @@ export class UsersService {
     user.programming_languages.push(foundProgrammingLanguage);
     return await this.usersRepository.save(user);
   }
+
+  public async removeProgrammingLanguage(id: string, programmingLanguageID: number) {
+    const user = await this.findOne(id);
+    if (!user) throw new NotFoundException('User was not found');
+
+    user.programming_languages = user.programming_languages.filter(language => language.programming_language_id !== programmingLanguageID);
+
+    return await this.usersRepository.save(user);
+  }
+
+
 }
