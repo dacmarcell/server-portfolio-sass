@@ -23,6 +23,7 @@ export class PostgresConfigService implements TypeOrmOptionsFactory {
       entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: true,
       logging: true,
+      ssl: true
     };
   }
 }
