@@ -52,3 +52,8 @@ area                    ENUM(['Back-end', 'Front-end', 'Full-stack', 'Mobile', '
 - [x] Usuário <n-n> Linguagens de Programação - (usuário tem várias linguagens de programação, linguagem de programação tem vários usuários) [UsuárioLinguagensDeProgramacao]
 - [x] Usuário <1-n> Projeto - (usuário tem vários projetos, projeto só tem um usuário)
 - [x] Usuário <1-n> Links sociais - (usuário tem vários links sociais, link social tem um usuário)
+  
+## Deploys
+
+- API (Koyeb)
+- PostgreSQL (Vercel)
